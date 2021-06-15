@@ -81,9 +81,9 @@ void MX_USB_HOST_Process(void);
 /* USER CODE BEGIN 0 */
 static lv_disp_draw_buf_t disp_buf;
 
- /*Static or global buffer(s). The second buffer is optional*/
- static lv_color_t buf_1[240 * 10];
- static lv_color_t buf_2[240 * 10];
+ //The second buffer is optional*/
+ static lv_color_t buf_1[320 * 60];
+ static lv_color_t buf_2[320 * 60];
  static lv_disp_drv_t disp_drv;
 /* USER CODE END 0 */
 
@@ -129,13 +129,13 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   ILI9341_Init();
-  ILI9341_ClearDisplay(ILI9341_BLACK);
+  //ILI9341_ClearDisplay(ILI9341_BLACK);
   //ILI9341_fillRect(50, 50, 10, 10, ILI9341_CYAN);
 
   HAL_Delay(30);
 
   lv_init();
-  lv_disp_draw_buf_init(&disp_buf, buf_1, NULL, 240 *10);
+  lv_disp_draw_buf_init(&disp_buf, buf_1, buf_2, 320 * 60);
   lv_disp_drv_init(&disp_drv);            /*Basic initialization*/
   disp_drv.draw_buf = &disp_buf;          /*Set an initialized buffer*/
   disp_drv.flush_cb = ILI9341_flush;        /*Set a flush callback to draw to the display*/
@@ -146,10 +146,8 @@ int main(void)
   lv_disp_drv_register(&disp_drv); /*Register the driver and save the created display objects*/
 
   HAL_Delay(10);
-  //demo_create();
- // lv_example_style_1();
-  lv_example_get_started_1();
 
+  lv_example_keyboard_1();
 
   uint32_t LedTim0;
   /* USER CODE END 2 */

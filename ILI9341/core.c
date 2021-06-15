@@ -95,7 +95,7 @@ void Send_DMA_Data16(uint16_t* buff, uint16_t dataSize)
 	 LL_DMA_ConfigTransfer(DMA1,
 	                        LL_DMA_STREAM_4,
 	                        LL_DMA_DIRECTION_MEMORY_TO_PERIPH | LL_DMA_PRIORITY_HIGH | LL_DMA_MODE_NORMAL |
-	                        LL_DMA_PERIPH_NOINCREMENT | LL_DMA_MEMORY_NOINCREMENT |
+	                        LL_DMA_PERIPH_NOINCREMENT | LL_DMA_MEMORY_INCREMENT |
 							LL_DMA_PDATAALIGN_HALFWORD | LL_DMA_MDATAALIGN_HALFWORD);
 	  LL_DMA_ConfigAddresses(DMA1,
 	                         LL_DMA_STREAM_4,
