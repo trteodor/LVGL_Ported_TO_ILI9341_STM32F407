@@ -144,7 +144,7 @@ int main(void)
 
 
   /*Initialize `disp_buf` with the buffer(s). With only one buffer use NULL instead buf_2 */
-  lv_disp_draw_buf_init(&disp_buf, buf_1, buf_2, 240 *10);
+  lv_disp_draw_buf_init(&disp_buf, buf_1, NULL, 240 *10);
 
            /*A variable to hold the drivers. Must be static or global.*/
   lv_disp_drv_init(&disp_drv);            /*Basic initialization*/
@@ -157,17 +157,23 @@ int main(void)
   lv_disp_drv_register(&disp_drv); /*Register the driver and save the created display objects*/
 
   HAL_Delay(10);
-
   //demo_create();
  // lv_example_style_1();
   lv_example_get_started_1();
 
+
+  uint32_t LedTim0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  if(HAL_GetTick()- LedTim0> 100)
+	  {
+		  LedTim0=HAL_GetTick();
+	      HAL_GPIO_TogglePin(LD5_GPIO_Port, LD5_Pin);
+	  }
       HAL_Delay(10);
       lv_task_handler();
       lv_tick_inc(10);
