@@ -79,7 +79,12 @@ void MX_USB_HOST_Process(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+static lv_disp_draw_buf_t disp_buf;
 
+ /*Static or global buffer(s). The second buffer is optional*/
+ static lv_color_t buf_1[240 * 10];
+ static lv_color_t buf_2[240 * 10];
+ static lv_disp_drv_t disp_drv;
 /* USER CODE END 0 */
 
 /**
@@ -121,17 +126,7 @@ int main(void)
 
   /* Initialize interrupts */
   MX_NVIC_Init();
-
-  static lv_disp_draw_buf_t disp_buf;
-
-  /*Static or global buffer(s). The second buffer is optional*/
-  static lv_color_t buf_1[240 * 10];
-  static lv_color_t buf_2[240 * 10];
-  static lv_disp_drv_t disp_drv;
-
   /* USER CODE BEGIN 2 */
-
-
 
   ILI9341_Init();
   ILI9341_ClearDisplay(ILI9341_WHITE);
@@ -139,14 +134,8 @@ int main(void)
 
   HAL_Delay(30);
 
-  lv_init(); // LVGL
-  /*A static or global variable to store the buffers*/
-
-
-  /*Initialize `disp_buf` with the buffer(s). With only one buffer use NULL instead buf_2 */
+  lv_init();
   lv_disp_draw_buf_init(&disp_buf, buf_1, NULL, 240 *10);
-
-           /*A variable to hold the drivers. Must be static or global.*/
   lv_disp_drv_init(&disp_drv);            /*Basic initialization*/
   disp_drv.draw_buf = &disp_buf;          /*Set an initialized buffer*/
   disp_drv.flush_cb = ILI9341_flush;        /*Set a flush callback to draw to the display*/
