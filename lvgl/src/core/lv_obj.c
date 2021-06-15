@@ -142,6 +142,10 @@ void lv_init(void)
     LV_LOG_WARN("Object sanity checks are enabled via LV_USE_ASSERT_OBJ which makes LVGL much slower")
 #endif
 
+#if LV_USE_ASSERT_STYLE
+    LV_LOG_WARN("Style sanity checks are enabled that uses more RAM")
+#endif
+
 #if LV_LOG_LEVEL == LV_LOG_LEVEL_TRACE
     LV_LOG_WARN("Log level is set the Trace which makes LVGL much slower")
 #endif
@@ -369,7 +373,7 @@ static void lv_obj_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 
     /*Set attributes*/
     obj->flags = LV_OBJ_FLAG_CLICKABLE;
-    obj->flags |= LV_OBJ_FLAG_SNAPABLE;
+    obj->flags |= LV_OBJ_FLAG_SNAPPABLE;
     if(parent) obj->flags |= LV_OBJ_FLAG_PRESS_LOCK;
     if(parent) obj->flags |= LV_OBJ_FLAG_SCROLL_CHAIN;
     obj->flags |= LV_OBJ_FLAG_CLICK_FOCUSABLE;
