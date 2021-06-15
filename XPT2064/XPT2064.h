@@ -4,6 +4,7 @@
  *  Created on: Nov 13, 2020
  *      Author: Mateusz Salamon
  */
+#include "main.h"
 
 #ifndef INC_XPT2064_H_
 #define INC_XPT2064_H_
@@ -14,6 +15,17 @@
 #define TOUCH_ROTATION	ILI9341_ROTATION
 #define DISPLAY_HEIGHT	ILI9341_TFTHEIGHT
 #define DISPLAY_WIDTH	ILI9341_TFTWIDTH
+
+//
+// Touch Screen States for State Machine
+//
+typedef enum
+{
+	XPT2046_IDLE,		// 0
+	XPT2046_PRESAMPLING, // 1
+	XPT2046_TOUCHED,	// 2
+	XPT2046_RELEASED	// 3
+} XPT2046_State;
 
 extern volatile XPT2046_State TouchState;
 

@@ -1,20 +1,18 @@
 
 #include "lv_drv.h"
 
+uint16_t Xread, Yread;
 
-void my_input_read(lv_indev_drv_t * drv, lv_indev_data_t*data)
+void lvXPT2064_Read(lv_indev_drv_t * drv, lv_indev_data_t*data)
 {
 	if(TouchState==XPT2046_TOUCHED)
 	{
-
+		XPT2046_GetTouchPoint(&Xread,&Yread);
+		 data->state = LV_INDEV_STATE_PRESSED;
+		    data->point.x = Xread;
+		    data->point.y = Yread;
 	}
-
-
-//  if(touchpad_pressed) {
-//    data->point.x = touchpad_x;
-//    data->point.y = touchpad_y;
-//    data->state = LV_INDEV_STATE_PRESSED;
-//  } else {
-//    data->state = LV_INDEV_STATE_RELEASED;
-//  }
+	else {
+	    data->state = LV_INDEV_STATE_RELEASED;
+	  }
 }

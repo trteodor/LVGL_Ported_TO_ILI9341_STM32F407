@@ -4,7 +4,6 @@
  *  Created on: Nov 13, 2020
  *      Author: Mateusz Salamon
  */
-#include "main.h"
 #include "XPT2064.h"
 
 // Samples to average touch coord
@@ -36,16 +35,7 @@ typedef struct
 	long double delta_y;
 } CalibData_t;
 
-//
-// Touch Screen States for State Machine
-//
-typedef enum
-{
-	XPT2046_IDLE,		// 0
-	XPT2046_PRESAMPLING, // 1
-	XPT2046_TOUCHED,	// 2
-	XPT2046_RELEASED	// 3
-} XPT2046_State;
+
 
 volatile XPT2046_State TouchState; // Current state
 

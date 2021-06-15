@@ -34,6 +34,7 @@
 
 
 #include "../XPT2064/XPT2064.h"
+#include "../XPT2064/lv_drv.h"
 
 #include "../ili9341/core.h"
 #include "../ili9341/lv_driver.h"
@@ -65,7 +66,6 @@
 /* USER CODE BEGIN PV */
 
 
-uint16_t Xread, Yread;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -132,23 +132,27 @@ int main(void)
   //ILI9341_ClearDisplay(ILI9341_BLACK);
   //ILI9341_fillRect(50, 50, 10, 10, ILI9341_CYAN);
 
+  XPT2046_Init(&hspi1, EXTI9_5_IRQn);
+
+ // DoCalibration();
+
   HAL_Delay(30);
 
   lv_init();
-  lv_disp_draw_buf_init(&disp_buf, buf_1, buf_2, 320 * 60);
-  lv_disp_drv_init(&disp_drv);            /*Basic initialization*/
-  disp_drv.draw_buf = &disp_buf;          /*Set an initialized buffer*/
-  disp_drv.flush_cb = ILI9341_flush;        /*Set a flush callback to draw to the display*/
-  disp_drv.hor_res = 320;                 /*Set the horizontal resolution in pixels*/
-  disp_drv.ver_res = 240;                 /*Set the vertical resolution in pixels*/
+  	  lv_disp_draw_buf_init(&disp_buf, buf_1, buf_2, 320 * 60);
+  	  lv_disp_drv_init(&disp_drv);            /*Basic initialization*/
+  	  disp_drv.draw_buf = &disp_buf;          /*Set an initialized buffer*/
+  	  disp_drv.flush_cb = ILI9341_flush;        /*Set a flush callback to draw to the display*/
+  	  disp_drv.hor_res = 320;                 /*Set the horizontal resolution in pixels*/
+  	  disp_drv.ver_res = 240;                 /*Set the vertical resolution in pixels*/
     lv_disp_drv_register(&disp_drv); /*Register the driver and save the created display objects*/
 
 
-  /*  lv_indev_drv_t indev_drv;
+    lv_indev_drv_t indev_drv;
     lv_indev_drv_init(&indev_drv);
-    indev_drv.type =LV_INDEV_TYPE_POINTER
-    indev_drv.read_cb =...
-    lv_indev_t * my_indev = lv_indev_drv_register(&indev_drv); */
+    indev_drv.type =LV_INDEV_TYPE_POINTER;
+    indev_drv.read_cb = lvXPT2064_Read;
+    lv_indev_drv_register(&indev_drv);
 
 
 
@@ -158,6 +162,7 @@ int main(void)
   lv_example_keyboard_1();
 
   uint32_t LedTim0;
+  uint32_t lvglTime=0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -169,9 +174,11 @@ int main(void)
 		  LedTim0=HAL_GetTick();
 	      HAL_GPIO_TogglePin(LD5_GPIO_Port, LD5_Pin);
 	  }
-      HAL_Delay(10);
-      lv_task_handler();
-      lv_tick_inc(10);
+	  if(HAL_GetTick()-lvglTime > 10)
+	  {
+	      lv_task_handler();
+	      lv_tick_inc(10);
+	  }
 	  XPT2046_Task();
 
     /* USER CODE END WHILE */
@@ -252,7 +259,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	if(GPIO_Pin == TOUCH_IRQ_Pin)
 	{
-		//XPT2046_IRQ();
+		XPT2046_IRQ();
 	}
 }
 /* USER CODE END 4 */

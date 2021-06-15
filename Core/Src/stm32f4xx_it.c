@@ -42,7 +42,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-
+extern void DMA1_Str4_TransmitComplete_Callback();
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
