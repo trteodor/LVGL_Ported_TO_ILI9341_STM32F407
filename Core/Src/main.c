@@ -80,11 +80,18 @@ void MX_USB_HOST_Process(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 static lv_disp_draw_buf_t disp_buf;
-
  //The second buffer is optional*/
- static lv_color_t buf_1[320 * 60];
- static lv_color_t buf_2[320 * 60];
+
+#define ILI_SCR_HORIZONTAL 320
+#define ILI_SCR_VERTICAL   240
+#define BUFFOR_SCR_ROWS 40
+
+ static lv_color_t buf_1[ILI_SCR_HORIZONTAL * BUFFOR_SCR_ROWS] ;
+ static lv_color_t buf_2[ILI_SCR_HORIZONTAL * BUFFOR_SCR_ROWS] ; //__attribute__ ((section (".LvBufferSection")))
+ 	 	 	 	 	 	 	 	 	 	 	 	 	 	 //DMA don't have acces to CCMRAM :(
+ 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 //I don't have so too much time on experiments
  static lv_disp_drv_t disp_drv;
+
 /* USER CODE END 0 */
 
 /**
@@ -129,22 +136,22 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   ILI9341_Init();
-  //ILI9341_ClearDisplay(ILI9341_BLACK);
+  ILI9341_ClearDisplay(ILI9341_BLACK);
   //ILI9341_fillRect(50, 50, 10, 10, ILI9341_CYAN);
 
   XPT2046_Init(&hspi1, EXTI9_5_IRQn);
 
- // DoCalibration();
+  DoCalibration();
 
   HAL_Delay(30);
 
   lv_init();
-  	  lv_disp_draw_buf_init(&disp_buf, buf_1, buf_2, 320 * 60);
+  	  lv_disp_draw_buf_init(&disp_buf, buf_1, buf_2, ILI_SCR_HORIZONTAL * BUFFOR_SCR_ROWS);
   	  lv_disp_drv_init(&disp_drv);            /*Basic initialization*/
   	  disp_drv.draw_buf = &disp_buf;          /*Set an initialized buffer*/
   	  disp_drv.flush_cb = ILI9341_flush;        /*Set a flush callback to draw to the display*/
-  	  disp_drv.hor_res = 320;                 /*Set the horizontal resolution in pixels*/
-  	  disp_drv.ver_res = 240;                 /*Set the vertical resolution in pixels*/
+  	  disp_drv.hor_res = ILI_SCR_HORIZONTAL;                 /*Set the horizontal resolution in pixels*/
+  	  disp_drv.ver_res = ILI_SCR_VERTICAL;                 /*Set the vertical resolution in pixels*/
     lv_disp_drv_register(&disp_drv); /*Register the driver and save the created display objects*/
 
 
@@ -159,7 +166,16 @@ int main(void)
 
   HAL_Delay(10);
 
-  lv_example_keyboard_1();
+  //lv_example_get_started_1();
+  //lv_example_textarea_2();
+  //lv_example_win_1();
+  //lv_example_animimg_1();
+  //lv_example_flex_1();
+  //lv_example_scroll_6();
+  lv_example_chart_7();
+  //lv_example_btnmatrix_3();
+  //lv_example_label_1(); //ciekawe przesuwanie tekstu!
+  //lv_example_img_3();  //o to jest mocne :D sporo zasobów musi zrec
 
   uint32_t LedTim0;
   uint32_t lvglTime=0;
@@ -174,8 +190,9 @@ int main(void)
 		  LedTim0=HAL_GetTick();
 	      HAL_GPIO_TogglePin(LD5_GPIO_Port, LD5_Pin);
 	  }
-	  if(HAL_GetTick()-lvglTime > 10)
+	  if(HAL_GetTick()-lvglTime >= 10)
 	  {
+		  lvglTime=HAL_GetTick();
 	      lv_task_handler();
 	      lv_tick_inc(10);
 	  }
@@ -183,7 +200,6 @@ int main(void)
 
     /* USER CODE END WHILE */
    // MX_USB_HOST_Process();
-
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

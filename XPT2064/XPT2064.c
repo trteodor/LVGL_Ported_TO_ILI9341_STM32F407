@@ -6,6 +6,10 @@
  */
 #include "XPT2064.h"
 
+#include "../ili9341/core.h"
+#include "XPT2064.h"
+#include "GFX_Color.h"
+
 // Samples to average touch coord
 #define MAX_SAMPLES 8
 // Interval between each samples (ms)
@@ -311,9 +315,9 @@ void XPT2046_Init(SPI_HandleTypeDef *hspi, IRQn_Type TouchIRQn)
 //
 void CalibrationPoint(uint16_t calX, uint16_t calY)
 {
-  // GFX_DrawCircle(calX, calY, 6, ILI9341_WHITE);
-  //GFX_DrawLine(calX-4, calY, calX+4, calY, ILI9341_WHITE);
-  //GFX_DrawLine(calX, calY-4, calX, calY+4, ILI9341_WHITE);
+  GFX_DrawCircle(calX, calY, 6, ILI9341_WHITE);
+  GFX_DrawLine(calX-4, calY, calX+4, calY, ILI9341_WHITE);
+  GFX_DrawLine(calX, calY-4, calX, calY+4, ILI9341_WHITE);
 }
 
 //
@@ -351,7 +355,7 @@ void CalculateCalibrationData(void)
 void DoCalibration(void)
 {
 	uint8_t calCount = 0;
-	//ILI9341_ClearDisplay(ILI9341_BLACK); // Clear screen for black
+	ILI9341_ClearDisplay(ILI9341_BLACK); // Clear screen for black
 	CalibrationMode = 1; // Set Calibration Mode
 
 	while(calCount < 4) // GEt all points and calculate
@@ -373,7 +377,7 @@ void DoCalibration(void)
 			}
 			break;
 		case 1: // 2nd point
-			//GFX_DrawFillRectangle(calA[0]-6, calA[1]-6, 13, 13, ILI9341_BLACK);
+			GFX_DrawFillRectangle(calA[0]-6, calA[1]-6, 13, 13, ILI9341_BLACK);
 
 			CalibrationPoint(calB[0], calB[1]);
 			if(TouchState == XPT2046_TOUCHED)
@@ -387,7 +391,7 @@ void DoCalibration(void)
 			}
 			break;
 		case 2: // 3rd point
-			//GFX_DrawFillRectangle(calB[0]-6, calB[1]-6, 13, 13, ILI9341_BLACK);
+			GFX_DrawFillRectangle(calB[0]-6, calB[1]-6, 13, 13, ILI9341_BLACK);
 
 			CalibrationPoint(calC[0], calC[1]);
 			if(TouchState == XPT2046_TOUCHED)
@@ -401,7 +405,7 @@ void DoCalibration(void)
 			}
 			break;
 		case 3: // calculate and save calibration data,
-			//GFX_DrawFillRectangle(calC[0]-6, calC[1]-6, 13, 13, ILI9341_BLACK);
+			GFX_DrawFillRectangle(calC[0]-6, calC[1]-6, 13, 13, ILI9341_BLACK);
 
 			CalculateCalibrationData();
 			calCount++;

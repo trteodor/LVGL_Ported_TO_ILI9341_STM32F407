@@ -167,6 +167,11 @@ SECTIONS
     . = ALIGN(8);
   } >RAM
 
+   .lvbuf_sec (NOLOAD) : {
+    . = ABSOLUTE(0x10000000);
+    *(.LvBufferSection) 
+  } >CCMRAM
+
   /* Remove information from the compiler libraries */
   /DISCARD/ :
   {
@@ -174,6 +179,8 @@ SECTIONS
     libm.a ( * )
     libgcc.a ( * )
   }
+  
+
 
   .ARM.attributes 0 : { *(.ARM.attributes) }
 }

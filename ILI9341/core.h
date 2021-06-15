@@ -133,5 +133,7 @@ void Send_DMA_Data16(uint16_t* buff, uint16_t dataSize);
 void ILI9341_SendCommand(uint8_t Command);
 void ILI9341_SetAddrWindow(uint16_t x1, uint16_t y1, uint16_t w, uint16_t h);
 void ILI9341_fillRect(uint16_t x1, uint16_t y1, uint16_t w, uint16_t h, uint16_t color);
+void ILI9341_SendData16(uint16_t Data);
+void ILI9341_SendCommandAndData(uint8_t Command, uint8_t *Data, uint32_t Length);
 
 #endif /* INC_TFT_ILI9341_H_ */

@@ -87,7 +87,6 @@ void Send_DMA_Data16(uint16_t* buff, uint16_t dataSize)
 	LL_SPI_Disable(SPI2);
 	LL_SPI_SetDataWidth(SPI2, LL_SPI_DATAWIDTH_16BIT);
 
-
 	  ILI9341_DC_HIGH;
 	  ILI9341_CS_LOW;
 
@@ -153,14 +152,13 @@ void ILI9341_SendCommand(uint8_t Command)
 
 	// Send to TFT 1 byte
 	ILI9341_SendToTFT(&Command, 1);
-
 	// CS High
 #if (ILI9341_USE_CS == 1)
 	ILI9341_CS_HIGH;
 #endif
 }
 
-static void ILI9341_SendCommandAndData(uint8_t Command, uint8_t *Data, uint32_t Length)
+void ILI9341_SendCommandAndData(uint8_t Command, uint8_t *Data, uint32_t Length)
 {
 	// CS Low
 #if (ILI9341_USE_CS == 1)
@@ -182,7 +180,7 @@ static void ILI9341_SendCommandAndData(uint8_t Command, uint8_t *Data, uint32_t 
 #endif
 }
 #if (ILI9341_OPTIMIZE_HAL_SP1 == 0)
-static void ILI9341_SendData16(uint16_t Data)
+void ILI9341_SendData16(uint16_t Data)
 {
 #if (ILI9341_USE_CS == 1)
 	ILI9341_CS_LOW;
