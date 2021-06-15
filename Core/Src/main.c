@@ -129,7 +129,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   ILI9341_Init();
-  ILI9341_ClearDisplay(ILI9341_WHITE);
+  ILI9341_ClearDisplay(ILI9341_BLACK);
   //ILI9341_fillRect(50, 50, 10, 10, ILI9341_CYAN);
 
   HAL_Delay(30);
