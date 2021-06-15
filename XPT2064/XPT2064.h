@@ -15,6 +15,9 @@
 #define DISPLAY_HEIGHT	ILI9341_TFTHEIGHT
 #define DISPLAY_WIDTH	ILI9341_TFTWIDTH
 
+extern volatile XPT2046_State TouchState;
+
+
 void XPT2046_Init(SPI_HandleTypeDef *hspi, IRQn_Type TouchIRQn);
 
 void XPT2046_Task(void);

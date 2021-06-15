@@ -141,9 +141,17 @@ int main(void)
   disp_drv.flush_cb = ILI9341_flush;        /*Set a flush callback to draw to the display*/
   disp_drv.hor_res = 320;                 /*Set the horizontal resolution in pixels*/
   disp_drv.ver_res = 240;                 /*Set the vertical resolution in pixels*/
+    lv_disp_drv_register(&disp_drv); /*Register the driver and save the created display objects*/
 
-  //lv_disp_t * disp;
-  lv_disp_drv_register(&disp_drv); /*Register the driver and save the created display objects*/
+
+  /*  lv_indev_drv_t indev_drv;
+    lv_indev_drv_init(&indev_drv);
+    indev_drv.type =LV_INDEV_TYPE_POINTER
+    indev_drv.read_cb =...
+    lv_indev_t * my_indev = lv_indev_drv_register(&indev_drv); */
+
+
+
 
   HAL_Delay(10);
 
@@ -164,8 +172,8 @@ int main(void)
       HAL_Delay(10);
       lv_task_handler();
       lv_tick_inc(10);
+	  XPT2046_Task();
 
-	 // XPT2046_Task();
     /* USER CODE END WHILE */
    // MX_USB_HOST_Process();
 
