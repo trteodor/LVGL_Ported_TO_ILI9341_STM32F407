@@ -1,0 +1,12 @@
+lvgl_ported_to_ili9341_stm32407g_keil\lv_tlsf.o: lvgl\src\misc\lv_tlsf.c
+lvgl_ported_to_ili9341_stm32407g_keil\lv_tlsf.o: lvgl\src\misc\../lv_conf_internal.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_tlsf.o: E:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_tlsf.o: lvgl\src\misc\../lv_conf_kconfig.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_tlsf.o: ../Core/Inc/../../lv_conf.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_tlsf.o: E:\Keil\ARM\ARMCC\Bin\..\include\assert.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_tlsf.o: E:\Keil\ARM\ARMCC\Bin\..\include\limits.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_tlsf.o: E:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_tlsf.o: lvgl\src\misc\lv_tlsf.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_tlsf.o: lvgl\src\misc\lv_mem.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_tlsf.o: lvgl\src\misc\lv_log.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_tlsf.o: lvgl\src\misc\lv_types.h

@@ -1,0 +1,9 @@
+lvgl_ported_to_ili9341_stm32407g_keil\lv_area.o: lvgl\src\misc\lv_area.c
+lvgl_ported_to_ili9341_stm32407g_keil\lv_area.o: lvgl\src\misc\../lv_conf_internal.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_area.o: E:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_area.o: lvgl\src\misc\../lv_conf_kconfig.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_area.o: ../Core/Inc/../../lv_conf.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_area.o: lvgl\src\misc\lv_area.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_area.o: E:\Keil\ARM\ARMCC\Bin\..\include\string.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_area.o: E:\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_area.o: lvgl\src\misc\lv_math.h

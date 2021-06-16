@@ -1,0 +1,13 @@
+lvgl_ported_to_ili9341_stm32407g_keil\lv_font.o: lvgl\src\font\lv_font.c
+lvgl_ported_to_ili9341_stm32407g_keil\lv_font.o: lvgl\src\font\lv_font.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_font.o: lvgl\src\font\../lv_conf_internal.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_font.o: E:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_font.o: lvgl\src\font\../lv_conf_kconfig.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_font.o: ../Core/Inc/../../lv_conf.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_font.o: E:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_font.o: E:\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_font.o: lvgl\src\font\lv_symbol_def.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_font.o: lvgl\src\font\../misc/lv_area.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_font.o: E:\Keil\ARM\ARMCC\Bin\..\include\string.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_font.o: lvgl\src\font\../misc/lv_utils.h
+lvgl_ported_to_ili9341_stm32407g_keil\lv_font.o: lvgl\src\font\../misc/lv_log.h

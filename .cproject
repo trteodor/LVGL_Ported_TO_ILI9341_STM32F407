@@ -187,7 +187,7 @@
                         						
                         <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="USB_HOST"/>
                         						
-                        <entry excluding="XPT2046.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="XPT2064"/>
+                        <entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="XPT2064"/>
                         						
                         <entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="lvgl"/>
                         					

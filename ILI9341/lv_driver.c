@@ -6,7 +6,9 @@
 static lv_disp_drv_t *LastDriver;
 uint16_t tbuf[100];
 
-void lvILI9341_SetAddrWindow(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
+void ILI9341_SetAddrWindowForLv(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
+			//I Create else 1 function to SetAddrWindow because LvGL calling the function
+					//with other parametrs. Similar function is implemented in ../ILI9341/core.c
 {
 	uint8_t DataToTransfer[4];
 	// Calculate end ranges
@@ -30,7 +32,12 @@ void lvILI9341_SetAddrWindow(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
 void ILI9341_flush(lv_disp_drv_t * drv, const lv_area_t * area,  lv_color_t * color_map)
 {
 	LastDriver=drv;
-	lvILI9341_SetAddrWindow((uint16_t)area->x1, (uint16_t)area->y1, (uint16_t)area->x2, (uint16_t)area->y2);
+	/*ILI9341_SetAddrWindow((uint16_t)area->x1, (uint16_t)area->y1,
+							(uint16_t)area->x2-(uint16_t)area->x1 +1, (uint16_t)area->y2-(uint16_t)area->y1 +1);*/
+					//Bc my SetAddrWindow function accepts argument x,y,w,h so i fitted into it
+												//Buy at the expense of performance
+														//Use It to safe some flash memory
+	ILI9341_SetAddrWindowForLv((uint16_t)area->x1, (uint16_t)area->y1, (uint16_t)area->x2, (uint16_t)area->y2);
 	ILI9341_SendCommand(ILI9341_RAMWR);
 	uint32_t size = (area->x2 - area->x1 +1) * (area->y2 - area->y1 +1);
 	Send_DMA_Data16( (uint16_t *)color_map, size);

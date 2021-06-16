@@ -136,12 +136,9 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   ILI9341_Init();
-  ILI9341_ClearDisplay(ILI9341_BLACK);
-  //ILI9341_fillRect(50, 50, 10, 10, ILI9341_CYAN);
-
   XPT2046_Init(&hspi1, EXTI9_5_IRQn);
 
-  DoCalibration();
+
 
   HAL_Delay(30);
 
@@ -161,21 +158,17 @@ int main(void)
     indev_drv.read_cb = lvXPT2064_Read;
     lv_indev_drv_register(&indev_drv);
 
-
-
-
   HAL_Delay(10);
-
   //lv_example_get_started_1();
   //lv_example_textarea_2();
   //lv_example_win_1();
   //lv_example_animimg_1();
   //lv_example_flex_1();
   //lv_example_scroll_6();
-  lv_example_chart_7();
+  //lv_example_chart_7();
   //lv_example_btnmatrix_3();
   //lv_example_label_1(); //ciekawe przesuwanie tekstu!
-  //lv_example_img_3();  //o to jest mocne :D sporo zasobów musi zrec
+  lv_example_img_3();  //o to jest mocne :D sporo zasobów musi zrec
 
   uint32_t LedTim0;
   uint32_t lvglTime=0;
@@ -190,11 +183,11 @@ int main(void)
 		  LedTim0=HAL_GetTick();
 	      HAL_GPIO_TogglePin(LD5_GPIO_Port, LD5_Pin);
 	  }
-	  if(HAL_GetTick()-lvglTime >= 10)
+	  if(HAL_GetTick()-lvglTime >= 5)
 	  {
 		  lvglTime=HAL_GetTick();
 	      lv_task_handler();
-	      lv_tick_inc(10);
+	      lv_tick_inc(5);
 	  }
 	  XPT2046_Task();
 
