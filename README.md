@@ -1,17 +1,3 @@
-
-+----------------------------------+-----------+------------------------+------------------+-----+-----+-----+
-|               Col1               |   Col2    |          Col3          | Numeric juz wiem |     |     |     |
-+----------------------------------+-----------+------------------------+------------------+-----+-----+-----+
-| Pozderki                         | Witam W 2 | 123                    | 10.0             |     |     |     |
-| Separate                         | cols      | with a tab or 4 spaces | -2,027.1         |     |     |     |
-| This is a row with only one cell |           |                        |                  |     |     |     |
-| Is works so simple               | dsdsf     | dsf                    | sf               | sad | sfs | sdf |
-| dsf                              | sdf       |                        |                  |     |     |     |
-+----------------------------------+-----------+------------------------+------------------+-----+-----+-----+
-
-
-
-
 I'am ported te lvgl 8.0 to STM32F407G + ILI9341 + XPT2064
 
 * I used Cube HAL and Low Level Driver (LL Library to drive SPI for optimization) 
