@@ -1,4 +1,47 @@
 /* USER CODE BEGIN Header */
+/*----------------------------------------------------------------------------
+ *       Simple Discovery Board - STM32F407G Demo, using littleVgl:                             *
+ *                                         *
+ *       LittleVgl V8.0                            *
+ *       LL (STM32 Low Level Drivers).              *
+ *       ILI9341 display over SPI with DMA,                                  *
+ *       XPT2046 resistive touch panel                                       *
+ *                                                                           *
+ *       ILI9341 SPI1 CONNECTIONS:                                           *
+ *       -------------------------------                                     *
+ *       TFT_RESET                   PD8                                     *
+ *       TFT_DC                      PD9                                     *
+ *       TFT_CS                      PB12                                    *
+ *       TFT_SCK                     PB13                                    *
+ *       TFT_MISO                    PB14                                    *
+ *       TFT_MOSI                    PB15                                    *
+ *                                                                           *
+ *       XPT2046 SPI2 CONNECTIONS:                                           *
+ *       --------------------------------                                    *
+ *       TOUCH_CLK                   PA5                                     *
+ *       TOUCH_DIN (MOSI)            PA7                                     *
+ *       TOUCH_DO (MISO)             PA6                                     *
+ *       TOUCH_CS                    PC4                                     *
+ *       TOUCH_IRQ                   PC5                                     *
+ *                                                                           *
+ *
+ *   CubeMX configuration:
+ *   Start From Default PinOut to the board
+ *
+ *   PC0 and PC4, PE3 Default High
+ *   NVIC->EXTILine 9:5 Interrupts ON
+ *   SPI1 Clk Prescaler 64 other opt default
+ *   SPI2 Clk Prescaler 2 , DMATX HalfWord Size Increment Memory other opt default
+ *
+ *   And PINS user label name as above (lines 12 - 27)
+ *
+ *   Add the folders to the compiler and much much more :/ dk what else
+ *
+ *
+ *                                                                          *
+ *                                                                           *
+ *---------------------------------------------------------------------------*/
+
 /**
   ******************************************************************************
   * @file           : main.c
@@ -31,7 +74,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "../lvgl/lvgl.h"
-
 
 #include "../XPT2064/XPT2064.h"
 #include "../XPT2064/lv_drv.h"
@@ -137,12 +179,9 @@ int main(void)
 
   ILI9341_Init();
   XPT2046_Init(&hspi1, EXTI9_5_IRQn);
-
-
-
   HAL_Delay(30);
 
-  lv_init();
+  	  lv_init();
   	  lv_disp_draw_buf_init(&disp_buf, buf_1, buf_2, ILI_SCR_HORIZONTAL * BUFFOR_SCR_ROWS);
   	  lv_disp_drv_init(&disp_drv);            /*Basic initialization*/
   	  disp_drv.draw_buf = &disp_buf;          /*Set an initialized buffer*/
@@ -157,10 +196,10 @@ int main(void)
     indev_drv.type =LV_INDEV_TYPE_POINTER;
     indev_drv.read_cb = lvXPT2064_Read;
     lv_indev_drv_register(&indev_drv);
-
   HAL_Delay(10);
+
   //lv_example_get_started_1();
-  //lv_example_textarea_2();
+  lv_example_textarea_2();
   //lv_example_win_1();
   //lv_example_animimg_1();
   //lv_example_flex_1();
@@ -168,7 +207,7 @@ int main(void)
   //lv_example_chart_7();
   //lv_example_btnmatrix_3();
   //lv_example_label_1(); //ciekawe przesuwanie tekstu!
-  lv_example_img_3();  //o to jest mocne :D sporo zasobów musi zrec
+  //lv_example_img_3();  //o to jest mocne :D sporo zasobów musi zrec
 
   uint32_t LedTim0;
   uint32_t lvglTime=0;

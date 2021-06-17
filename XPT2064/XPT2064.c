@@ -1,29 +1,27 @@
 /*
  * XPT2064.c
  *
- *  Created on: Nov 13, 2020
- *      Author: Mateusz Salamon
+ *  Created on: 16.06, 2021
+ *      Author: Teodor
  */
 #include "XPT2064.h"
 
 #include "../ili9341/core.h"
 #include "XPT2064.h"
 
-// Samples to average touch coord
 #define MAX_SAMPLES 8
-// Interval between each samples (ms)
 #define SAMPLE_INTERVAL	1
 
-static SPI_HandleTypeDef *Xpt2046SpiHandler; // SPI handler
-static IRQn_Type Xpt2046Irqn; // Interrupt numer
+static SPI_HandleTypeDef *Xpt2046SpiHandler;
+static IRQn_Type Xpt2046Irqn;
 
-static uint8_t ChannelSettingsX, ChannelSettingsY; // XPT2046 control bytes for channels
-static uint8_t SendBuffer[5]; // Send buffer with control bytes packed
-static uint8_t ReceiveBuffer[5]; // Receive buffer with XPT2046 conversions
+static uint8_t ChannelSettingsX, ChannelSettingsY;
+static uint8_t SendBuffer[5];
+static uint8_t ReceiveBuffer[5];
 
-uint16_t TouchSamples[2][MAX_SAMPLES]; // Samples buffer for average coords calculation
-uint8_t SampleCounter; // How many samples we have now
-uint32_t SampleTimer; // Software Timer
+uint16_t TouchSamples[2][MAX_SAMPLES];
+uint8_t SampleCounter;
+uint32_t SampleTimer;
 
 //
 // Calibration data for make a new coordinates calculation
@@ -38,15 +36,9 @@ typedef struct
 	long double delta_y;
 } CalibData_t;
 
-
-
 volatile XPT2046_State TouchState; // Current state
-
 static uint8_t CalibrationMode; // Is calibration mode active
 
-//
-// Calibration data used for each coords calculation
-//
 #if (TOUCH_ROTATION == 0)
 CalibData_t CalibrationData = {-.0009337, -.0636839, 250.342, -.0889775, -.00118110, 356.538}; // default calibration data
 #endif
@@ -59,7 +51,6 @@ CalibData_t CalibrationData = {.0006100, .0647828, -13.634, .0890609, .0001381, 
 #if (TOUCH_ROTATION == 3)
 CalibData_t CalibrationData = {.0902216, .0006510, -38.657, -.0010005, -.0667030, 258.08}; // default calibration data
 #endif
-
 //
 //	Calibration data - pattern points
 //
@@ -79,11 +70,9 @@ uint16_t calC[] = {300, 110};
 uint16_t calA_raw[] = {0, 0}; // Read data
 uint16_t calB_raw[] = {0, 0};
 uint16_t calC_raw[] = {0, 0};
-
 //
 // HW function
 //
-
 //
 // Read Raw data from controller XPT2046
 //
@@ -314,9 +303,7 @@ void XPT2046_Init(SPI_HandleTypeDef *hspi, IRQn_Type TouchIRQn)
 //
 void CalibrationPoint(uint16_t calX, uint16_t calY)
 {
- // GFX_DrawCircle(calX, calY, 6, ILI9341_WHITE);
- // GFX_DrawLine(calX-4, calY, calX+4, calY, ILI9341_WHITE);
- // GFX_DrawLine(calX, calY-4, calX, calY+4, ILI9341_WHITE);
+//Draw Calibration Point
 }
 
 //
@@ -354,12 +341,12 @@ void CalculateCalibrationData(void)
 void DoCalibration(void)
 {
 	uint8_t calCount = 0;
-	ILI9341_ClearDisplay(ILI9341_BLACK); // Clear screen for black
-	CalibrationMode = 1; // Set Calibration Mode
+	ILI9341_ClearDisplay(ILI9341_BLACK);
+	CalibrationMode = 1;
 
-	while(calCount < 4) // GEt all points and calculate
+	while(calCount < 4)
 	{
-		XPT2046_Task(); // We have to read touch points
+		XPT2046_Task();
 
 		switch(calCount)
 		{
@@ -376,7 +363,7 @@ void DoCalibration(void)
 			}
 			break;
 		case 1: // 2nd point
-		//	GFX_DrawFillRectangle(calA[0]-6, calA[1]-6, 13, 13, ILI9341_BLACK);
+		//DrawFillRectangle
 
 			CalibrationPoint(calB[0], calB[1]);
 			if(TouchState == XPT2046_TOUCHED)
@@ -390,7 +377,7 @@ void DoCalibration(void)
 			}
 			break;
 		case 2: // 3rd point
-		//	GFX_DrawFillRectangle(calB[0]-6, calB[1]-6, 13, 13, ILI9341_BLACK);
+			//DrawFillRectangle
 
 			CalibrationPoint(calC[0], calC[1]);
 			if(TouchState == XPT2046_TOUCHED)
@@ -404,7 +391,7 @@ void DoCalibration(void)
 			}
 			break;
 		case 3: // calculate and save calibration data,
-		//	GFX_DrawFillRectangle(calC[0]-6, calC[1]-6, 13, 13, ILI9341_BLACK);
+			//DrawFillRectangle
 
 			CalculateCalibrationData();
 			calCount++;
