@@ -1,6 +1,6 @@
 I'am ported te lvgl 8.0 to STM32F407G + ILI9341 + XPT2064
 
-* Cube Low Level Driver 
+* Cube Low Level Driver (LL Library to drive SPI for optimization) 
 * ILI9341 Connected via SPI + DMA , it works in my opinion very well and stable! :) 
 
 https://youtu.be/eH6FKjgsQfg   <- My Video prestation how to port the LVGL libarary on STM32 device or other in Polish league, it's rly simple!
