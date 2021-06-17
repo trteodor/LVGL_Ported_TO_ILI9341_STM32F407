@@ -3,6 +3,7 @@
  *
  *  Created on: 16.06, 2021
  *      Author: Teodor
+ In fact, this file was directly copied from https://kursstm32.pl/
  */
 #include "XPT2064.h"
 

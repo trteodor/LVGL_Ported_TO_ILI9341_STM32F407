@@ -3,6 +3,7 @@
  *
  *  Created on: Nov 13, 2020
  *      Author: Mateusz Salamon
+ In fact, this file was directly copied from https://kursstm32.pl/
  */
 #include "main.h"
 
