@@ -1,6 +1,6 @@
 I'am ported te lvgl 8.0 to STM32F407G + ILI9341 + XPT2064
 
-https://youtu.be/eH6FKjgsQfg   <- My Video prestation how to port the libarary on STM32 device or other in Polish league, it's rly simple!
+https://youtu.be/eH6FKjgsQfg   <- My Video prestation how to port the LVGL libarary on STM32 device or other in Polish league, it's rly simple!
 
 External Links and sources:
 
