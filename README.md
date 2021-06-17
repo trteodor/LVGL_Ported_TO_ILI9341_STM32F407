@@ -9,9 +9,17 @@ External Links and sources:
 
 https://www.youtube.com/c/LVGL-GUI/featured
 
+LVGL official Site:
   https://lvgl.io/
+DataSheet of LVGL
+https://docs.lvgl.io/master/index.html
 
+The ILI9341 Driver is Based on:
 https://github.com/ScarsFun/lvgl_STM32F103_ILI9341_XPT2046
+I modified a large part of this driver
+
+XPT2064 Driver  is taken directly from:
+https://kursstm32.pl/
 
 One of examples from the Lib:
 
