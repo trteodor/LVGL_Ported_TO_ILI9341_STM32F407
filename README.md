@@ -1,4 +1,6 @@
-I'am ported te lvgl 8.0 to STM32F407G + ILI9341 + XPT2064
+I'am ported te lvgl 8.0 to STM32F407G + ILI9341 + XPT2046
+
+*Sorry but i using the XPT2046 (no XPT2064 i have errors in file names, but i don't have time to make correct it)
 
 * I used Cube HAL and Low Level Driver (LL Library to drive SPI for optimization) 
 * ILI9341 Connected via SPI + DMA 
